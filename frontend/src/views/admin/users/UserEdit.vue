@@ -1,7 +1,8 @@
 <template>
     <div >
+        User Edit works !
+        <p> Numéro utilisateur: {{ id }} </p>
         
-       User Edit
     </div>
 
 </template>
@@ -11,7 +12,7 @@
 
 export default {
     name: 'UserEdit',
-   
+    props: ['id'],   
 }
 </script>
 

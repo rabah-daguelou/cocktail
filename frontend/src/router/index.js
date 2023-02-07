@@ -3,9 +3,13 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
 
-
 import * as Public from '@/views/public/index.js'
 import * as Admin from '@/views/admin/index.js'
+
+import Login from '@/views/auth/login.vue'
+
+import authGaurd from '@/_helpers/auth-guard.js'
+
 
 const routes = [
   // Partie public
@@ -22,35 +26,48 @@ const routes = [
 
   // Partie Admin
   {
-    path:'/admin',
-    name:'AdminLayout',
+    path:'/admin', 
+    name:'admin',
     component: Admin.AdminLayout,
     children: [
       {path:'dashboard', name:'Dashboard', component: Admin.Dashboard},
       {path:'users/index', name:'UserIndex', component: Admin.UserIndex},
       {path:'users/add', name:'UserAdd', component: Admin.UserAdd},
-      {path:'users/edit/:id', name:'UserEdit', component: Admin.UserEdit},
+      {path:'users/edit/:id(\\d+)', name:'UserEdit', component: Admin.UserEdit, props: true},
       
       {path:'cocktails/edit/:id', name:'CocktailEdit', component: Admin.CocktailEdit},
       {path:'cocktails/index', name:'CocktailIndex', component: Admin.CocktailIndex},
     ]
   },
 
+  // Authentification
+  {
+    path: '/login', name: Login, component: Login
+  },
+
   // Route 404
   {
-    path: '/:pathMatch(.*)*',
+    path: '/:pathMatch(.*)*', redirect: '/',
+    
     name: 'NotFound',
     component: Public.NotFound,
     },
   
 ]
-  
-  
-  
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+// Fermeture des routes Admin
+router.beforeEach((to, from, next) => {
+  console.log (to)
+  if (to.matched[0].name == 'admin') {
+    console.log (' Vous voulez aller sur '+ to.path)
+    authGaurd()
+  }
+  next()
 })
 
 export default router

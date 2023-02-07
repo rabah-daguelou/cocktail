@@ -7,7 +7,7 @@ const User= require ('../models/user');
 
 // Routage de la ressource auth
 exports.login = async (req, res, next)=> {
-    
+    console.log("body:", req.body)
     try {
         const {email, password} = req.body;
 

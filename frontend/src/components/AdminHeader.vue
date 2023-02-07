@@ -1,5 +1,5 @@
 <template>
-    <div class="ad_header">
+    <div class="ad_head">
          AdminHeader
     </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-    .ad_header {
-        border-bottom: 1px solid black;
+    .ad_head {
+        border-bottom: 2px solid black;
     }
 </style>
