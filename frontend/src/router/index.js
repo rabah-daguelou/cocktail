@@ -62,7 +62,7 @@ const router = createRouter({
 
 // Fermeture des routes Admin
 router.beforeEach((to, from, next) => {
-  console.log (to)
+  
   if (to.matched[0].name == 'admin') {
     console.log (' Vous voulez aller sur '+ to.path)
     authGaurd()

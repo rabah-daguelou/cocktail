@@ -14,9 +14,10 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },
-  //"parser": '@babel/eslint-parser',
- // "parserOptions": {
-  //  "requireConfigFile": false,
-//}
+  "parser": '@babel/eslint-parser',
+  // eslint-disable-next-line no-dupe-keys
+  "parserOptions": {
+   "requireConfigFile": false,
+  }
 
 }

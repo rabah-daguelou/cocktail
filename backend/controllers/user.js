@@ -7,7 +7,7 @@ const {UserErrors, RequestErrors} = require ('../errors/customErrors')
 // 1- Récupération de tous les utilisateurs
 exports.getAllUsers = ((req, res)=> {
     User.findAll()
-        .then (users => res.json ({data: users}))
+        .then (users => res.json ({users}))
         .catch (err => res.status(500).json({message: " Database Error", error: err}))
 })
 

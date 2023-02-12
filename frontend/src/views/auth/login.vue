@@ -14,7 +14,7 @@
                 
             </div>
             <div class="formFroup"> <br>
-                <button type="submit" class="button"> Se connecter </button>    
+                <button type="submit" class="button" @click="login"> Se connecter </button>    
             </div>
         </form>
     </div>
@@ -23,6 +23,7 @@
 <script>
 // Importer tous les services
 import { accountServices } from '@/_services'
+//import axios from 'axios'
 
 export default {
     name: 'Login',
@@ -38,23 +39,15 @@ export default {
 
     methods: {
         login() {
-           fetch('http://localhost:8888/auth/login', {
-           headers: {
-            'Accept': 'application/json',
-            'Content-Type':'application/json'
-           },
-            method: 'POST',
-            body: JSON.stringify(this.user)
-           } )
-            .then (blob=> blob.json())
-            .then (data=> {
-                console.log (data)
-                localStorage.setItem('token', data.access_token)
-                this.$router.push('admin/dashboard')
-            })
-           
-            .catch(error=>console.log(error))
-            
+            accountServices.login(this.user)
+         //  axios.post('http://localhost:8888/auth/login', this.user)
+                .then (res => {
+                    console.log (res)
+                    accountServices.saveToken(res.data.access_token);
+                    this.$router.push('/admin/dashboard')
+                })
+
+                .catch (err => console.log(err))
         }
     }
 
