@@ -7,7 +7,7 @@ const {RequestErrors, CocktailErrors} = require ('../errors/customErrors')
 
 // 1- Récupération de tous les cocktails
 exports.getAllCocktails = ((req, res, next)=> {
-    Cocktail.findAlln()
+    Cocktail.findAll()
         .then (cocktails => res.json({data: cocktails}))
         .catch (err => next(err))
 });
@@ -104,7 +104,7 @@ exports.softDeleteOneCocktail = async (req, res, next)=> {
         cocktail = await Cocktail.destroy({where: {id: cocktailId }})
         
         // Réponse de la mise en poubelle
-        return res.status(204).json({})
+        return res.status(204).json({message: "Cocktail dans la corbeille!"})
     } catch (err) {
         next(err)
     }
@@ -121,7 +121,7 @@ exports.restaureOneCocktail = async (req, res, next) => {
 
         // Restaurer le cocktail
         await Cocktail.restore({where: {id: cocktailId}})
-            return res.status(204).json({})
+            return res.status(204).json({ message: "Cocktail restauré !"})
     } catch (error) {
         next(error)
     }
@@ -141,7 +141,7 @@ exports.hardDeleteOneCocktail = async (req, res, next)=> {
         }
         // Supprimer le cocktail
         cocktail = await Cocktail.destroy({where: {id: cocktailId }})
-        return res.status(204).json({})
+        return res.status(204).json({ message: 'Cocktail définitivement supprimé !'})
     } catch (err) {
         return next(err)
     }

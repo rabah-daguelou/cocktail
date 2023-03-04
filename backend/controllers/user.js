@@ -7,7 +7,9 @@ const {UserErrors, RequestErrors} = require ('../errors/customErrors')
 // 1- Récupération de tous les utilisateurs
 exports.getAllUsers = ((req, res)=> {
     User.findAll()
-        .then (users => res.json ({users}))
+        .then (users => {
+            res.json ({data:users})
+        })
         .catch (err => res.status(500).json({message: " Database Error", error: err}))
 })
 
@@ -63,6 +65,7 @@ exports.addOneUser = async (req, res, next) => {
 
 // 4- Modifier un utilisateur défini
 exports.modifyOneUser = async (req, res, next)=> {
+    console.log('new user:', req.body)
     try {
         let userId= parseInt(req.params.id)
 

@@ -35,7 +35,7 @@ router.put('', checkTokenMiddleware,  cocktailCtrls.addOneCocktail)
 router.patch('/:id', checkTokenMiddleware,  cocktailCtrls.modifyOneCocktail);
 
 // 5- Supprimer le cocktail et le mettre dans la corbeille
-    router.delete('/trash/:id', checkTokenMiddleware, cocktailCtrls.softDeleteOneCocktail)
+router.delete('/trash/:id', checkTokenMiddleware, cocktailCtrls.softDeleteOneCocktail)
 
 // 6- Restaurer un cocktail supprimé dans la corbeille
 router.post('/untrash/:id',  checkTokenMiddleware, cocktailCtrls.restaureOneCocktail)

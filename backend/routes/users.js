@@ -19,19 +19,20 @@ const checkTokenMiddleware = require ('../jsonwebtoken/check')
 // Import du controlleur des users
 const usersCtrl = require ('../controllers/user')
 
-// -----  Routage de la ressource User ----------
+// -----  Routage de la ressource User 
+// Ressources fermées avec checkTokenMiddleware -
 
 // 1- Récupération de tous les utilisateurs
-router.get('', usersCtrl.getAllUsers)
+router.get('', checkTokenMiddleware, usersCtrl.getAllUsers)
 
 // 2- Récupération d'un utilisateur en particulier
-router.get('/:id', checkTokenMiddleware, usersCtrl.getOneUser)
+router.get('/:id', usersCtrl.getOneUser)
 
 // 3- Ajouter un utilisateur // Le Post n'est pas utilisé dans les API restfull
-router.put('', usersCtrl.addOneUser)
+router.put('', checkTokenMiddleware, usersCtrl.addOneUser)
 
 // 4- Modifier un utilisateur défini
-router.patch('/:id', checkTokenMiddleware, usersCtrl.modifyOneUser);
+router.patch('/:id',  usersCtrl.modifyOneUser);
 
 // 5- Supprimer un utilisateur défini
 

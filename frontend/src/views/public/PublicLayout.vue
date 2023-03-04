@@ -1,6 +1,6 @@
 <template>
     <div class="public">
-              
+        <!-- {{ getLounis }}-->      
         <PublicNav/>
         <router-view/>
     </div>
@@ -9,11 +9,16 @@
 
 <script>
 import PublicNav from '@/components/PublicNav.vue'
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'PublicLayout',
     components: {
         PublicNav,
+    },
+    
+    computed: {
+    //    ...mapGetters(['getLounis'])
     }
 }
 </script>

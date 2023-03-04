@@ -16,6 +16,7 @@
             <div class="formFroup"> <br>
                 <button type="submit" class="button" @click="login"> Se connecter </button>    
             </div>
+            <p v-if="errorMessage" :style="'color:red'"> {{ errorMessage }}</p>
         </form>
     </div>
 </template>
@@ -33,7 +34,8 @@ export default {
             user: {
                 email: "",
                 password: "",
-            }
+            },
+            errorMessage:""
         }
     },
 
@@ -43,11 +45,14 @@ export default {
          //  axios.post('http://localhost:8888/auth/login', this.user)
                 .then (res => {
                     console.log (res)
-                    accountServices.saveToken(res.data.access_token);
+                    accountServices.saveToken(res.access_token);
                     this.$router.push('/admin/dashboard')
                 })
 
-                .catch (err => console.log(err))
+                .catch (err =>  {
+                    console.log(err)
+                  //  this.errorMessage = err.response.data.message
+                })
         }
     }
 
@@ -55,9 +60,9 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    margin-bottom: 40px;
-}
+    h1 {
+        margin-bottom: 40px;
+    }
     input {
         width: 200px;
         height: 40px;

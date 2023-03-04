@@ -6,9 +6,11 @@
                 <li>&nbsp;</li>
                 <li><router-link to='/admin/dashboard'>Dashboard</router-link></li>
                 <li>&nbsp;</li>
-                <li><router-link to='/admin/users/index'>User list</router-link></li>
-                <li><router-link to='/admin/users/edit/12'>User 12</router-link></li>
-                <li><router-link to="/" @click="disconnection"> Se déconnecter </router-link> </li>
+                <li><router-link to='/admin/users/index'>Users list</router-link></li>
+                <li><router-link to='/admin/users/add'>User add </router-link></li>
+                <li>&nbsp;</li>
+                <li><router-link to='/admin/cocktails/list'>Cocktails list</router-link></li>
+                <li><router-link to='/admin/cocktails/edit'> Cocktail add </router-link></li>
                 
             </ul>
         </nav>
@@ -20,11 +22,7 @@
 
 export default {
     name: 'AdminNav',
-    methods: {
-        disconnection() {
-            localStorage.clear()
-        }
-    }
+    
 }
 </script>
 

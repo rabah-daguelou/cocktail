@@ -31,13 +31,17 @@ const routes = [
     component: Admin.AdminLayout,
     children: [
       {path:'dashboard', name:'Dashboard', component: Admin.Dashboard},
-      {path:'users/index', name:'UserIndex', component: Admin.UserIndex},
-      {path:'users/add', name:'UserAdd', component: Admin.UserAdd},
-      {path:'users/edit/:id(\\d+)', name:'UserEdit', component: Admin.UserEdit, props: true},
       
-      {path:'cocktails/edit/:id', name:'CocktailEdit', component: Admin.CocktailEdit},
-      {path:'cocktails/index', name:'CocktailIndex', component: Admin.CocktailIndex},
-    ]
+      {path:'users/index', name:'usersList', component: Admin.UserIndex},
+      {path:'users/add', name:'userAdd', component: Admin.UserAdd},
+      {path:'users/edit/:id(\\d+)', name:'userEdit', component: Admin.UserEdit, props: true},
+      
+    //  {path:'cocktails/add', name:'cocktailAdd', component: Admin.CocktailAdd},
+      
+      {path:'cocktails/list', name:'cocktailsList', component: Admin.CocktailList},
+      {path:'cocktails/edit/:id(\\d+)?', name:'cocktailEdit', component: Admin.CocktailEdit, props: true},
+      
+    ] 
   },
 
   // Authentification
@@ -64,7 +68,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   
   if (to.matched[0].name == 'admin') {
-    console.log (' Vous voulez aller sur '+ to.path)
+    console.log (' Vous êtes sur:  '+ to.path)
     authGaurd()
   }
   next()

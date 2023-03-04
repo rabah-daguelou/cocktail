@@ -7,8 +7,7 @@ const User= require ('../models/user');
 
 // Routage de la ressource auth
 exports.login = async (req, res, next)=> {
-    console.log("body:", req.body)
-    try {
+       try {
         const {email, password} = req.body;
 
         // Vérifier s'il y'a l'email et le password
@@ -43,6 +42,7 @@ exports.login = async (req, res, next)=> {
                 expiresIn: process.env.JWT_DURING
             }
         )
+        console.log ('Connecté !')
         return res.json({access_token: token})
     } catch (err) {
         next (err)
